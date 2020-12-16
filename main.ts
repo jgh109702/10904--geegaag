@@ -33,11 +33,9 @@ radio.onReceivedNumber(function (receivedNumber) {
     }
 })
 input.onButtonPressed(Button.A, function () {
-	
+    caller += 1
 })
-let caller = 0
-radio.setGroup(1)
-basic.forever(function () {
+input.onButtonPressed(Button.B, function () {
     if (caller == 1) {
         basic.showLeds(`
             # . . . .
@@ -239,7 +237,12 @@ basic.forever(function () {
             . . . . #
             `)
     }
+    caller = 0
 })
+let caller = 0
+radio.sendNumber(0)
+caller = 0
+radio.setGroup(1)
 basic.forever(function () {
     radio.sendNumber(1)
 })
