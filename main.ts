@@ -1,14 +1,13 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    if (50 >= Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength))) {
+    if (50 < Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength))) {
         basic.showLeds(`
-            # . . . #
-            . # # # .
-            . # # # .
             . # # # .
             # . . . #
+            # . . . #
+            # . . . #
+            . # # # .
             `)
-        OLED.writeStringNewLine("good")
-    } else if (60 > Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength))) {
+    } else if (40 < Math.abs(radio.receivedPacket(RadioPacketProperty.SignalStrength))) {
         basic.showLeds(`
             . . # . .
             . . # . .
@@ -16,20 +15,8 @@ radio.onReceivedNumber(function (receivedNumber) {
             . . . . .
             . . # . .
             `)
-        OLED.writeStringNewLine("caution")
-        music.playTone(262, music.beat(BeatFraction.Whole))
-        music.setVolume(97)
-    } else {
-        basic.showLeds(`
-            # . . . #
-            . # . # .
-            . . # . .
-            . # . # .
-            # . . . #
-            `)
-        OLED.writeStringNewLine("warning")
         music.setVolume(255)
-        music.playTone(988, music.beat(BeatFraction.Breve))
+        music.playTone(988, music.beat(BeatFraction.Whole))
     }
 })
 input.onButtonPressed(Button.A, function () {
